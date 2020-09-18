@@ -55,6 +55,22 @@ public class CityRestController {
         return result;
     }
 	
+	@RequestMapping(path = "/district/{district}", method = RequestMethod.GET)
+    public ResponseModel<List<CityModel>> getByDistrict(@PathVariable("district") String district, HttpServletRequest request){
+        String param = request.getRequestURI();
+
+        System.out.println("param "+param);
+        System.out.println("district "+district);
+
+        ResponseModel<List<CityModel>> result = new ResponseModel<>();
+        List<CityModel> data = cityService.getByDistrict(district);
+        result.setData(data);
+        result.setResponseCode(200);
+        result.setResponseMessage("OK");
+
+        return result;
+    }
+	
 	@RequestMapping(path = "/{startPopulation}/{endPopulation}")
 	public ResponseModel<List<CityModel>> getByPopupation(@PathVariable("startPopulation") Integer startPopulation, @PathVariable ("endPopulation")Integer endPopulation, HttpServletRequest request){
 		String param = request.getRequestURI();
@@ -88,5 +104,6 @@ public class CityRestController {
 
         return result;
     }
+	
    
 }

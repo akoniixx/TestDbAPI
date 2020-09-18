@@ -40,6 +40,13 @@ public class CityService {
         return transformEntityToModel(cityList);
 
     }
+    public List<CityModel> getByDistrict(String district) {
+
+        List<City> cityList = cityRepository.findByDistrict(district);
+
+        return transformEntityToModel(cityList);
+
+    }
     
     public List<CityModel> getByPopupation(Integer startPopulation,Integer endPopulation){
     	List<City> cityList = cityRepository.findByPopulation(startPopulation, endPopulation);
