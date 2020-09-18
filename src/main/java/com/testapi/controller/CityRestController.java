@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +17,7 @@ import com.testapi.model.ResponseModel;
 import com.testapi.service.CityService;
 
 @RestController
+@CrossOrigin
 public class CityRestController {
 	
 	
@@ -24,7 +27,7 @@ public class CityRestController {
         this.cityService = cityService;
     }
 
-	
+    
 	@RequestMapping(path = "city")
     public ResponseModel<List<CityModel>> getAllCity(){
         ResponseModel<List<CityModel>> result = new ResponseModel<>();
@@ -36,7 +39,7 @@ public class CityRestController {
         return result;
     }
 	
-	@RequestMapping(path = "/country/{countryCode}")
+	@RequestMapping(path = "/country/{countryCode}", method = RequestMethod.GET)
     public ResponseModel<List<CityModel>> getByContryCode(@PathVariable("countryCode") String countryCode, HttpServletRequest request){
         String param = request.getRequestURI();
 
@@ -69,7 +72,8 @@ public class CityRestController {
         return result;
 	}
 	
-	@RequestMapping(path = "/name/{nameCity}")
+	 
+	@RequestMapping(path = "/name/{nameCity}", method = RequestMethod.GET)
     public ResponseModel<List<CityModel>> getByName(@PathVariable("nameCity") String name, HttpServletRequest request){
         String param = request.getRequestURI();
 
